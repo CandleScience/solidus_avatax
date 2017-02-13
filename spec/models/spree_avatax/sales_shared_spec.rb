@@ -32,6 +32,7 @@ describe SpreeAvatax::SalesShared do
       line_item.update_attributes!({
         additional_tax_total: 1,
         adjustment_total: 1,
+        pre_tax_amount: 1,
         included_tax_total: 1,
       })
     end
@@ -50,6 +51,12 @@ describe SpreeAvatax::SalesShared do
     it 'should remove all eligible tax adjustments' do
       subject
       expect(line_item.adjustments.tax.count).to eq 0
+    end
+
+    it 'sets pre_tax_amount to discounted_amount' do
+      subject
+      expect(line_item.reload.pre_tax_amount).to eq(2 * 3)
+      expect(shipment.reload.pre_tax_amount).to eq(5)
     end
 
     context 'when a SalesInvoice record is present' do
