@@ -1,4 +1,4 @@
-module SolidusAvatax
+module SpreeAvatax
   module Generators
     class InstallGenerator < Rails::Generators::Base
 
@@ -15,7 +15,7 @@ module SolidusAvatax
       end
 
       def add_migrations
-        run 'bundle exec rake railties:install:migrations FROM=solidus_avatax'
+        run 'bundle exec rake railties:install:migrations FROM=spree_avatax'
       end
 
       def run_migrations

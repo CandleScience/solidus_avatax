@@ -1,7 +1,7 @@
 # encoding: UTF-8
 Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
-  s.name        = "solidus_avatax"
+  s.name        = "spree_avatax"
   s.version     = "2.0.0.alpha"
   s.summary     = "Avatax extension for Solidus"
   s.description = "Solidus extension to retrieve tax rates via Avalara's SOAP API."
@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
   s.require_path = "lib"
   s.requirements << "none"
 
-  s.add_dependency "solidus_core", ">= 1.3.0.alpha", "< 1.4"
+  s.add_dependency "spree_core", "~> 3.0.7"
   s.add_dependency "hashie",      "~> 2.l.5"
   s.add_dependency "multi_json"
   s.add_dependency "Avatax_TaxService", "~> 2.0.0"

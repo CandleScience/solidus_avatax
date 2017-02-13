@@ -2,7 +2,7 @@ Solidus Avatax
 ===========
 
 [![Build Status](https://travis-ci.org/solidusio/solidus_avatax.svg?branch=master)](https://travis-ci.org/solidusio/solidus_avatax)
- 
+
 Avatax integration with Solidus.
 
 Installation
@@ -11,14 +11,14 @@ Installation
 In your Gemfile:
 
 ```ruby
-gem "solidus_avatax"
+gem "spree_avatax"
 ```
 
 Then run from the command line:
 
 ```shell
 bundle install
-rails g solidus_avatax:install
+rails g spree_avatax:install
 ```
 
 Configuration
@@ -35,7 +35,7 @@ values create a new SpreeAvatax::Config. The default values are:
 SpreeAvatax::Config.create!(enabled: true, timeout: SpreeAvatax::Config::DEFAULT_TIMEOUT)
 ```
 
-This is an append-only table and solidus_avatax will read these config values
+This is an append-only table and spree_avatax will read these config values
 from the last record (by id).
 
 #### Short Ships
