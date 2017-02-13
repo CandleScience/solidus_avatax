@@ -58,32 +58,23 @@ describe "Tax Calculation" do
     end
 
     let(:promotion) do
-      FactoryGirl.create(
-        :promotion,
-        code: "order_promotion",
-        promotion_actions: [
-          Spree::Promotion::Actions::CreateAdjustment.new(
-            calculator: Spree::Calculator::FlatRate.new(preferred_amount: 10),
-          ),
-        ],
-      )
+      promo = create(:promotion, code: "order_promotion")
+      calculator = Spree::Calculator::FlatRate.new
+      calculator.preferred_amount = 10
+      Spree::Promotion::Actions::CreateAdjustment.create!(calculator: calculator, promotion: promo)
+      promo
     end
 
     let(:line_item_promotion) do
-      FactoryGirl.create(
-        :promotion_with_item_total_rule,
-        code: 'line_item_promotion'
-      )
+      promo = create(:promotion_with_item_adjustment, code: 'line_item_promotion')
+      promo.rules << Spree::Promotion::Rules::Product.create!(preferred_match_policy: 'any', product_ids_string: order.line_items.first.product.id.to_s)
+      promo
     end
 
     before do
       order.line_items.each { |li| li.update_attributes!(price: 50.0) }
-
-      order.coupon_code = promotion.codes.first.value
-      Spree::PromotionHandler::Coupon.new(order).apply
-
-      order.coupon_code = line_item_promotion.codes.first.value
-      Spree::PromotionHandler::Coupon.new(order).apply
+      PromotionSupport.set_order_promotion(order)
+      PromotionSupport.set_line_item_promotion(order)
     end
 
     it "computes taxes for a line item" do
