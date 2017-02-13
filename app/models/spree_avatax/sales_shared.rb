@@ -40,7 +40,7 @@ module SpreeAvatax::SalesShared
           label:      Spree.t(:avatax_label),
           included:   false, # would be true for VAT
           source:     Spree::TaxRate.avatax_the_one_rate,
-          finalized:  true, # this tells spree not to automatically recalculate avatax tax adjustments
+          state:      'closed', # this tells spree not to automatically recalculate avatax tax adjustments
         })
 
         Spree::ItemAdjustments.new(record).update
