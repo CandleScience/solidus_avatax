@@ -46,7 +46,6 @@ describe SpreeAvatax::ShortShipReturnInvoice do
       while order.next; end
       create(:payment, amount: order.total, order: order)
       while order.next; end
-      order.complete!
       order.reload
     end
 
