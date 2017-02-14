@@ -43,9 +43,9 @@ describe SpreeAvatax::ShortShipReturnInvoice do
         source: Spree::TaxRate.avatax_the_one_rate,
         state: 'closed'
       )
-      order.contents.advance
+      while order.next; end
       create(:payment, amount: order.total, order: order)
-      order.contents.advance
+      while order.next; end
       order.complete!
       order.reload
     end
