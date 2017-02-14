@@ -68,14 +68,16 @@ describe Spree::Order do
   end
 
   context "when transitioning to complete" do
+    let(:credit_card) { create(:credit_card) }
+
     before do
       subject.update_attributes!(state: 'confirm')
-      subject.payments.create!(state: 'checkout')
+      subject.payments.create!(state: 'checkout', source: credit_card, payment_method: credit_card.payment_method)
     end
 
     it "commits the sales invoice" do
       expect(SpreeAvatax::SalesInvoice).to receive(:commit).with(subject)
-      subject.complete!
+      subject.next!
     end
   end
 
