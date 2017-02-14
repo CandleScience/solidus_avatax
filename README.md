@@ -38,17 +38,6 @@ SpreeAvatax::Config.create!(enabled: true, timeout: SpreeAvatax::Config::DEFAULT
 This is an append-only table and spree_avatax will read these config values
 from the last record (by id).
 
-#### Short Ships
-
-If you want to notify Avatax about short ships you should configure the
-following:
-
-```ruby
-Spree::OrderCancellations.short_ship_tax_notifier = ->(unit_cancels) do
-  SpreeAvatax::ShortShipReturnInvoice.generate(unit_cancels: unit_cancels)
-end
-```
-
 Known Issues
 ------------
 
